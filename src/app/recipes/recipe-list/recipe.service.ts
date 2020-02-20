@@ -33,6 +33,7 @@ export class RecipeService {
     }
 
     getRecipe( index: number ) {
+        console.log(this.recipes[index]);
         return this.recipes[index];
     }
 

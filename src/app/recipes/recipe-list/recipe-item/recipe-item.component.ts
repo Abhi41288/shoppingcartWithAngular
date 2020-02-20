@@ -1,6 +1,7 @@
 import { RecipeService } from './../recipe.service';
 import { Recipe } from './../../recipe.model';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 
 
 @Component( {
@@ -14,6 +15,7 @@ export class RecipeItemComponent implements OnInit {
   constructor( private recipeService: RecipeService ) { }
 
   ngOnInit() {
+    
   }
 
 

@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "../newCourceProject/node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "../shoppingcartWithAngular/node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
