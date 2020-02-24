@@ -5,6 +5,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 const appRoute: Routes = [
     {
@@ -38,10 +40,12 @@ const appRoute: Routes = [
         path: 'shopping-list',
         component: ShoppingListComponent
     }
-]
+];
 
 @NgModule( {
-    imports: [RouterModule.forRoot( appRoute )],
+    imports: [RouterModule.forRoot( appRoute ),
+        FormsModule,
+        ReactiveFormsModule],
     exports: [RouterModule]
 } )
 export class AppRoutingModule {
