@@ -30,7 +30,7 @@ export class RecipeEditComponent implements OnInit {
   }
 
   get controls() {
-    return ( <FormArray>this.recipeForm.get( 'ingredients' ) ).controls;
+    return ( <FormArray>this.recipeForm.get( 'ingredient' ) ).controls;
   }
 
   private initForm() {
@@ -50,7 +50,7 @@ export class RecipeEditComponent implements OnInit {
           recipeIngredients.push(
             new FormGroup( {
               'name': new FormControl( ingredient.name ),
-              'amount': new FormGroup( ingredient.amount )
+              'amount': new FormControl( ingredient.amount)
             } )
           )
         }
