@@ -34,7 +34,7 @@ export class RecipeService {
     }
 
     getRecipe( index: number ) {
-        console.log(this.recipes[index]);
+        console.log( this.recipes[index] );
         return this.recipes[index];
     }
 
@@ -42,14 +42,19 @@ export class RecipeService {
         this.slService.addIngredients( ingredient );
     }
 
-    addRecipe(recipe:Recipe){
-this.recipes.push(recipe);
-this.recipeChanged.next(this.recipes.slice());
+    addRecipe( recipe: Recipe ) {
+        this.recipes.push( recipe );
+        this.recipeChanged.next( this.recipes.slice() );
     }
 
-    updateRecipe(index:number,newRecipe:Recipe){
-        this.recipes[index]=newRecipe;
+    updateRecipe( index: number, newRecipe: Recipe ) {
+        this.recipes[index] = newRecipe;
 
+    }
+
+    deleteRecipe( index: number ) {
+        this.recipes.splice( index, 1 );
+        this.recipeChanged.next( this.recipes.slice() );
     }
 
 }
