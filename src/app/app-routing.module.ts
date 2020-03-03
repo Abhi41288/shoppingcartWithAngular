@@ -1,3 +1,4 @@
+import { AuthComponent } from './auth/auth.component';
 import { RecipesResolverService } from './recipes/recipe-list/recipes-resolver.service';
 import { RecipeDetailsComponent } from './recipes/recipe-details/recipe-details.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
@@ -7,6 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const appRoute: Routes = [
@@ -18,6 +20,7 @@ const appRoute: Routes = [
     {
         path: 'recipes',
         component: RecipesComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: '',
@@ -42,6 +45,10 @@ const appRoute: Routes = [
     {
         path: 'shopping-list',
         component: ShoppingListComponent
+    },
+    {
+        path: 'auth',
+        component: AuthComponent
     }
 ];
 

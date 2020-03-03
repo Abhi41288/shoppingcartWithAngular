@@ -1,3 +1,7 @@
+import { AlertComponent } from './shared/alert/alert.component';
+import { AuthInterceptor } from './auth/auth-interceptor.service';
+import { LoadingSpinnerComponent } from './shared/loadingSpinner/loading-spinner.component';
+import { AuthComponent } from './auth/auth.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { DropdownDirective } from './shared/dropdown.directive';
@@ -5,7 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -33,7 +37,10 @@ import { RecipeService } from './recipes/recipe-list/recipe.service';
     RecipeItemComponent,
     DropdownDirective,
     RecipeStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    AuthComponent,
+    LoadingSpinnerComponent,
+    AlertComponent
 
   ],
   imports: [
@@ -44,7 +51,7 @@ import { RecipeService } from './recipes/recipe-list/recipe.service';
     HttpClientModule
 
   ],
-  providers: [ShoppingListService, RecipeService],
+  providers: [ShoppingListService, RecipeService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 } )
 export class AppModule { }
