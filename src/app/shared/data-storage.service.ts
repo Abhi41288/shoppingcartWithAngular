@@ -21,22 +21,20 @@ export class DataStorageService {
 
     fetchRecipe() {
 
-        return this.http.get<Recipe[]>( 'https://ng-course-recipe-book-8368f.firebaseio.com/recipes.json',
+        return this.http.get<Recipe[]>( 'https://ng-course-recipe-book-8368f.firebaseio.com/recipes.json' )
+            .pipe(
+                map( recipes => {
+                    return recipes.map( recipe => {
+                        return {
+                            ...recipe,
+                            ingredients: recipe.ingredient ? recipe.ingredient : []
+                        };
+                    } );
+                } ),
+                tap( recipes => {
+                    this.recipesService.setRecipes( recipes );
+                } )
 
-        ).pipe(
-
-            map( recipes => {
-                return recipes.map( recipe => {
-                    return {
-                        ...recipe,
-                        ingredients: recipe.ingredient ? recipe.ingredient : []
-                    };
-                } );
-            } ),
-            tap( recipes => {
-                this.recipesService.setRecipes( recipes );
-            } )
-
-        );
+            );
     }
 }

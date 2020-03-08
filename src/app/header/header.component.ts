@@ -9,7 +9,7 @@ import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/cor
     templateUrl: './header.component.html'
 } )
 export class HeaderComponent implements OnInit {
-    collapsed: true;
+    collapsed: boolean = true;
     private userSub: Subscription;
     isAuthenticated = false;
 

@@ -4,11 +4,12 @@ import { RecipeDetailsComponent } from './recipes/recipe-details/recipe-details.
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './auth/auth.guard';
+import { RecipesModule } from './recipes/recipes.module';
 
 
 const appRoute: Routes = [
@@ -19,43 +20,25 @@ const appRoute: Routes = [
     },
     {
         path: 'recipes',
-        component: RecipesComponent,
-        canActivate: [AuthGuard],
-        children: [
-            {
-                path: '',
-                component: RecipeStartComponent
-            },
-            {
-                path: 'new',
-                component: RecipeEditComponent
-            },
-            {
-                path: ':id',
-                component: RecipeDetailsComponent,
-                resolve: [RecipesResolverService]
-            },
-            {
-                path: ':id/edit',
-                component: RecipeEditComponent,
-                resolve: [RecipesResolverService]
-            }
-        ]
+        // loadChildren: './recipes/recipes.module#RecipesModule'
+        loadChildren: () => import( './recipes/recipes.module' ).then( m => m.RecipesModule )
     },
     {
         path: 'shopping-list',
-        component: ShoppingListComponent
+        loadChildren: './shopping-list/shopping-list.module#ShoppingListModule'
     },
     {
         path: 'auth',
-        component: AuthComponent
+        loadChildren: './auth/auth.module#AuthModule'
     }
+
 ];
 
 @NgModule( {
-    imports: [RouterModule.forRoot( appRoute ),
+    imports: [RouterModule.forRoot( appRoute, { preloadingStrategy: PreloadAllModules } ),
         FormsModule,
-        ReactiveFormsModule],
+        ReactiveFormsModule
+    ],
     exports: [RouterModule]
 } )
 export class AppRoutingModule {
